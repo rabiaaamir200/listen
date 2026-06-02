@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rap Playlist</title>
+  <!-- Bootstrap 5 CSS for Responsiveness -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       CUSTOM CSS STYLING (Dark Music App Theme)
+       ========================================== */
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    .navbar {
+      backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px 15px;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #ff007f !important;
+    }
+
+    .nav-link {
+      color: white !important;
+      transition: 0.3s;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    .nav-link:hover {
+      color: #ff007f !important;
+      opacity: 1;
+    }
+
+    .btn-custom {
+      background-color: #ff007f;
+      color: black;
+      border-radius: 20px;
+      padding: 5px 10px;
+    }
+
+    .btn-signup {
+      background-color: #ff007f;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 10px #ff007f(255, 0, 127, 0.4);
+    }
+
+    .btn-signup:hover {
+      background-color: #ff007f;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 20px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .nav-arrow:hover {
+      background-color: #ff007f;
+      border-color: #ff007f;
+      color: #fff;
+    }
+
+    .nav-arrow.prev { left: 20px; }
+    .nav-arrow.next { right: 20px; }
+
+    .nav-logo {
+      width: 40px;
+      height: auto;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 14px;
+      z-index: 10;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 10px;
+      width: 10px;
+      background-color: #ff007f;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .dot.active, .dot:hover {
+      background-color: #ff007f;
+      transform: scale(1.2);
+    }
+
+    /* Header */
+    .header {
+      padding: 40px 60px 20px;
+    }
+
+    .header h1 {
+      font-size: 55px;
+      font-weight: bold;
+    }
+
+    .header p {
+      color: #aaa;
+    }
+
+    /* Categories */
+    .categories {
+      padding: 0 60px 40px;
+    }
+
+    .category-btn {
+      background: #181818;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 30px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .category-btn:hover, .category-btn.active {
+      background: #ff007f;
+    }
+
+    .playlist-box {
+      background: linear-gradient(180deg, #242424 0%, #121212 100%);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .playlist-img {
+      width: 100%;
+      max-width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .playlist-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .playlist-desc {
+      color: #b3b3b3;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .play-btn {
+      background-color: #ff007f; 
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .play-btn:hover {
+      background-color: #ff007f;
+      transform: scale(1.05);
+    }
+
+    /* Table Adjustments */
+    .table-responsive {
+      margin-top: 2.5rem;
+    }
+
+    .table-dark {
+      background-color: transparent !important;
+    }
+
+    .table th {
+      color: #b3b3b3;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #282828;
+    }
+
+    .table td {
+      border-bottom: 1px solid #282828;
+      padding: 1rem 0.75rem;
+    }
+
+    /* Audio Component Display Rule */
+    .audio {
+      display: none;
+    }
+
+    /* MATCHING PAGE BUTTON BRANDING */
+    .control-btn {
+      background-color: #ff007f !important;
+      border: none !important;
+      color: white !important;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .control-btn:hover {
+      background-color: #ff007f !important;
+      color: white !important;
+    }
+
+    /* Active Highlight Play State */
+    .btn-play-active {
+      background-color: #ff007f !important;
+      box-shadow: 0 0 8px #ff007f(255, 0, 127, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .playlist-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .playlist-desc, .top-section {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <div class="logo-container">
+        <img src="./logo.jpeg" alt="Logo" class="nav-logo">
+        <span class="logo-text ms-2">ListenUp</span>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="./indexE.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./Playlist1.html">Playlists</a></li>
+          <li class="nav-item"><a class="nav-link" href="./Artists.html">Artists</a></li>
+        </ul>
+        <div class="d-flex">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+            <button class="btn btn-outline-light me-2" type="submit">Search</button>
+          </form>
+          <a href="#" class="btn btn-outline-light me-2">Login</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Playlists</h1>
+    <p>Discover trending playlists from all genres.</p>
+  </div>
+
+  <div class="container">
+    <!-- Categories Menu Selector -->
+    <div class="categories">
+      <button class="category-btn" data-category="all" onclick="window.location.href='playlist1.html'">All</button>
+      <button class="category-btn" data-category="pop" onclick="window.location.href='pop1.html'">Pop</button>
+      <button class="category-btn active" data-category="rap" onclick="window.location.href='rap1.html'">Rap</button>
+      <button class="category-btn" data-category="classical" onclick="window.location.href='classical1.html'">Classical</button>
+      <button class="category-btn" data-category="jazz" onclick="window.location.href='jazz1.html'">Jazz</button>
+      <button class="category-btn" data-category="rock" onclick="window.location.href='rock1.html'">Rock</button>
+      <button class="category-btn" data-category="trending" onclick="window.location.href='trending1.html'">Trending</button>
+    </div>
+
+    <div class="playlist-box">
+      <!-- Top Header Display Area -->
+      <div class="row align-items-center top-section">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <img src="./photo-1541788968749-7683d395688d.avif" class="playlist-img" alt="Rap Music">
+        </div>
+        <div class="col-md-8">
+          <h1 class="playlist-title">Rap</h1>
+          <p class="playlist-desc">Rap speaks what hearts hide.</p>
+          <button class="play-btn" onclick="PlayAllSongs()">
+            <i class="bi bi-play-fill"></i> Play All
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Section -->
+      <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+          <thead>
+            <tr>
+              <th style="width: 5%">#</th>
+              <th style="width: 35%">Song</th>
+              <th style="width: 25%">Artist</th>
+              <th style="width: 15%">Duration</th>
+              <th style="width: 20%">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="songsTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       JAVASCRIPT AUDIO LOGIC
+       ========================================== -->
+  <script>
+    // 1. RAP TRACKS REPOSITORY (Fixed parent folder location mapping links)
+    const songs = [
+      {
+        id: 1,
+        title: "Not Afraid",
+        audio: "../eproject_imges/Rap Music/Eminem/rap Eminem 4.mp3",
+        duration: "4:20",
+        singer: "Eminem",
+      },
+      {
+        id: 2,
+        title: "Changes",
+        audio: "../eproject_imges/Rap Music/Tupac Shakur/rap tupac 4.mp3",
+        duration: "3:45",
+        singer: "Tupac Shakur",
+      },
+      {
+        id: 3,
+        title: "Juicyy",
+        audio: "../eproject_imges/Rap Music/The Notorious B.I.G/rap notorious 1 .mp3", 
+        duration: "4:10",
+        singer: "The Notorious B.I.G",
+      },
+      {
+        id: 4,
+        title: "Humble",
+        audio: "../eproject_imges/Rap Music/Kendrick Lamar/rap  Kendrick 1.mp3",
+        duration: "3:58",
+        singer: "Kendrick Lamar",
+      }
+    ];
+
+    // 2. DYNAMIC TABLE GENERATION
+    const songsTable = document.getElementById("songsTable");
+
+    songs.forEach((song) => {
+        songsTable.innerHTML += `
+        <tr>
+            <td>${song.id}</td>
+            <td><strong>${song.title}</strong></td>
+            <td>${song.singer}</td>
+            <td>${song.duration}</td>
+            <td>
+                <!-- PLAY BUTTON -->
+                <button
+                    id="playBtn${song.id}"
+                    class="play-button btn btn-sm control-btn me-2"
+                    onclick="PlaySong(${song.id})"
+                >
+                    ▶ Play
+                </button>
+
+                <!-- STOP BUTTON -->
+                <button class="btn btn-sm control-btn" onclick="StopSong(${song.id})">
+                    ⏹ Stop
+                </button>
+
+                <!-- AUDIO ENGINE TRACK ELEMENT -->
+                <audio
+                    id="song${song.id}"
+                    class="audio"
+                    src="${song.audio}">
+                </audio>
+            </td>
+        </tr>
+        `;
+    });
+
+    // 3. EXECUTE PLAY AND TOGGLE LOGIC TRACKER
+    const PlaySong = (songid) => {
+        const allSongs = document.querySelectorAll(".audio");
+        const allButtons = document.querySelectorAll(".play-button");
+        const songToPlay = document.getElementById("song" + songid);
+        const playButton = document.getElementById("playBtn" + songid);
+
+        if (!songToPlay.paused) {
+            songToPlay.pause();
+            playButton.innerHTML = "▶ Play";
+            playButton.classList.remove("btn-play-active");
+            return;
+        }
+
+        allSongs.forEach((song) => {
+            song.pause();
+            song.currentTime = 0;
+        });
+
+        allButtons.forEach((btn) => {
+            btn.innerHTML = "▶ Play";
+            btn.classList.remove("btn-play-active");
+        });
+
+        songToPlay.play();
+        playButton.innerHTML = "⏸ Playing";
+        playButton.classList.add("btn-play-active");
+
+        songToPlay.onended = () => {
+            playButton.innerHTML = "▶ Play";
+            playButton.classList.remove("btn-play-active");
+        };
+    };
+
+    // 4. STOP MEDIA ASSET CHANNELS
+    const StopSong = (songid) => {
+        const songToStop = document.getElementById("song" + songid);
+        const playButton = document.getElementById("playBtn" + songid);
+
+        songToStop.pause();
+        songToStop.currentTime = 0;
+        
+        playButton.innerHTML = "▶ Play";
+        playButton.classList.remove("btn-play-active");
+    };
+
+    // 5. MASTER BATCH PLAY INITIALIZER
+    const PlayAllSongs = () => {
+        if(songs.length > 0) {
+            PlaySong(songs[0].id);
+        }
+    };
+  </script>
+</body>
+</html> 

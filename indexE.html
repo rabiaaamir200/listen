@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Listen Up</title>
+  <link rel="icon" type="image/jfif" href="./logo-without-background.png">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+ <style>
+  /* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+  background: #000;
+  color: white;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 0;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ff007f !important;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-nav {
+  gap: 10px;
+}
+
+.nav-link {
+  color: white !important;
+  transition: 0.3s;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: #ff007f !important;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-text {
+  color: white;
+  font-size: 22px;
+}
+
+.logo-container:hover .logo-text {
+  color: #ff007f;
+  transition: 0.3s;
+}
+
+.nav-logo {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+}
+
+/* =========================
+   SEARCH BOX
+========================= */
+
+.search-box input {
+  width: 220px;
+  height: 42px;
+  border-radius: 12px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  padding: 0 15px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.search-box input::placeholder {
+  color: #cfcfcf;
+}
+
+.search-box input:focus {
+  border-color: #ff007f;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn-custom,
+.btn-signup,
+.butn,
+#btn,
+#btnn,
+#btnnn {
+  background-color: #ff007f;
+  color: white;
+  border-radius: 40px;
+  border: 1px solid white;
+}
+
+.btn-signup {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.butn {
+  width: 90px;
+  padding: 6px 10px;
+}
+
+#btn {
+  width: 80px;
+}
+
+#btnn {
+  width: 100px;
+}
+
+#btnnn {
+  width: 120px;
+}
+
+/* =========================
+   SLIDER
+========================= */
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1300px;
+  height: 600px;
+  margin: 90px auto 40px;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  background-size: cover;
+  background-position: center;
+  padding: 60px;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slide-content {
+  max-width: 600px;
+  z-index: 2;
+}
+
+.slide h1 {
+  font-size: 54px;
+  font-weight: 900;
+  margin-bottom: 25px;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.slide p {
+  font-size: 18px;
+  color: #f0f0f0;
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+/* =========================
+   SLIDER BUTTONS
+========================= */
+
+.slider-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.slider-buttons .btn {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: #ff007f;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #ff007f;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ff007f;
+  color: #ff007f;
+}
+
+/* =========================
+   SLIDER ARROWS
+========================= */
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-arrow:hover {
+  background: #ff007f;
+}
+
+.nav-arrow.prev {
+  left: 10px;
+}
+
+.nav-arrow.next {
+  right: 10px;
+}
+
+/* =========================
+   DOTS
+========================= */
+
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff007f;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot.active,
+.dot:hover {
+  transform: scale(1.2);
+}
+
+/* =========================
+   SONG SECTION
+========================= */
+
+.song {
+  margin: 25px 15px;
+  padding-left: 10px;
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+  margin-bottom: 25px;
+  background: #111;
+  border: 1px solid white;
+  color: white;
+}
+
+.card-body {
+  border: 1px solid white;
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+#rap {
+  width: 100%;
+  height: auto;
+}
+
+/* =========================
+   PLAY BUTTONS
+========================= */
+
+.play-button,
+.control-btn {
+  background: #ff007f;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 5px;
+}
+
+.play-button:hover,
+.control-btn:hover {
+  transform: scale(1.05);
+}
+
+/* =========================
+   FORMS
+========================= */
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  display: block;
+  width: 100%;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  background: black;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ff007f;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons a {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #181818;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background: #ff007f;
+  transform: scale(1.1);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px) {
+
+  .navbar-nav {
+    margin: 15px 0;
+    text-align: center;
+  }
+
+  .d-flex.align-items-center {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .slider-wrapper {
+    height: 500px;
+  }
+
+  .slide {
+    padding: 40px;
+  }
+
+  .slide h1 {
+    font-size: 40px;
+  }
+
+  .slide p {
+    font-size: 16px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .slider-wrapper {
+    height: auto;
+    min-height: 520px;
+    border-radius: 0;
+    margin-top: 80px;
+  }
+
+  .slide {
+    padding: 30px 20px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .slide-content {
+    max-width: 100%;
+    margin-top: 60px;
+  }
+
+  .slide h1 {
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+
+  .slide p {
+    font-size: 15px;
+    margin-bottom: 25px;
+  }
+
+  .slider-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .slider-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .nav-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .nav-arrow.prev {
+    left: 5px;
+  }
+
+  .nav-arrow.next {
+    right: 5px;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  .nav-logo {
+    width: 32px;
+  }
+
+  .song {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* =========================
+   EXTRA SMALL DEVICES
+========================= */
+
+@media (max-width: 480px) {
+
+  .slide h1 {
+    font-size: 24px;
+  }
+
+  .slide p {
+    font-size: 14px;
+  }
+
+  .slider-buttons .btn {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+
+  .search-box input {
+    font-size: 14px;
+  }
+
+  .nav-arrow {
+    display: none;
+  }
+}
+ </style>
+</head>
+
+<body>
+
+  <!-- Navbar Start -->
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+
+      <!-- Logo -->
+       <!-- Logo -->
+<div>
+  <a href="./indexE.html" class="logo-container text-decoration-none">
+    <img src="./logo.jpeg" alt="Logo" class="nav-logo">
+    <span class="logo-text"><b>ListenUp</b></span>
+  </a>
+</div>
+      <!-- <nav>
+        <div class="logo-container">
+          <img src="./logo.jpeg" alt="Logo" class="nav-logo">
+          <span class="logo-text"><b>ListenUp</b></span>
+        </div>
+      </nav> -->
+
+      <!-- Toggle Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu Items -->
+
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./indexE.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="./Playlist1.html ">Playlists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./Artists.html">Artists</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+
+  <form class="search-box" role="search">
+    <input type="search" placeholder="Search" aria-label="Search">
+  </form>
+        <!-- <div class="d-flex">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+
+          </form> -->
+
+
+
+          <a href="#" class="btn btn-outline-light me-2">Login</a>
+          <div>
+
+            <!-- Buttons -->
+          </div>
+
+
+  </nav>
+
+
+
+
+
+  <div class="slider-wrapper">
+
+    <div class="slider-branding">
+
+      <div class="branding-actions">
+        <a href="./login,signup/signup.html" class="btn-signup" id="create">Create Account</a>
+        <!-- <a href="#" class="nav-link">For Artists</a> -->
+      </div>
+    </div>
+
+    <div class="slide active"
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200');">
+      <div class="slide-content">
+        <h1>LISTEN UP to the Future of Sound.</h1>
+        <p>From breaking underground acts to global superstars, discover the artists defining the next era of music.
+          Your journey starts now.</p>
+        <div class="slider-buttons">
+          <a href="#" class="btn btn-primary ">Start Listening</a>
+          <a href="#" class="btn btn-secondary">Explore Genre Hubs</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide"
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200');">
+      <div class="slide-content">
+        <h1>Feel Every Beat.<br>Hear Every Detail.</h1>
+        <p>Experience studio-quality audio. Every bass drop and intricate melody, curated with pristine clarity just
+          for you.</p>
+        <div class="slider-buttons">
+          <a href="#" class="btn btn-primary">Try Listen Up Pro</a>
+          <a href="#" class="btn btn-secondary">Audio Specs</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide"
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1593697972672-1b1d1f05ef96?q=80&w=1200');">
+      <div class="slide-content">
+        <h1>Your Next Obsession Starts Here.</h1>
+        <p>Our personalized algorithms predict what you'll love next, delivering tracks and artists matched perfectly
+          to your vibe.</p>
+        <div class="slider-buttons">
+          <a href="#" class="btn btn-primary">Discover Weekly</a>
+          <a href="#" class="btn btn-secondary">Your Daily Mixes</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide"
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1200');">
+      <div class="slide-content">
+        <h1>Connect with the Artists You Love.</h1>
+        <p>Go beyond streaming. Get exclusive artist content, live-stream access, and direct community interactions.
+        </p>
+        <div class="slider-buttons">
+          <a href="#" class="btn btn-primary">Artist Hubs</a>
+          <a href="#" class="btn btn-secondary">Live Events</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide"
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200');">
+      <div class="slide-content">
+        <h1>Global Beats.<br>Local Vibe.</h1>
+        <p>Explore the sounds of the world. Listen Up brings you the best music and emerging talent from every corner
+          of the globe.</p>
+        <div class="slider-buttons">
+          <a href="#" class="btn btn-primary">Browse by Region</a>
+          <a href="#" class="btn btn-secondary">Top Charts</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide"
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1483412033650-1015ddec83d1?q=80&w=1200');">
+      <div class="slide-content">
+        <h1>Find Your Perfect Rhythm.</h1>
+        <p>From nostalgic classics to cutting-edge electronic beats, fine-tune your listening experience exactly how
+          you want it.</p>
+        <div class="slider-buttons">
+          <a href="#" class="btn btn-primary">Create Your Vibe</a>
+          <a href="#" class="btn btn-secondary">Explore Collections</a>
+        </div>
+      </div>
+    </div>
+
+    <button class="nav-arrow prev" onclick="moveSlide(-1) ">&#10094;</button>
+    <button class="nav-arrow next" onclick="moveSlide(1)">&#10095;</button>
+
+    <div class="slider-dots">
+      <span class="dot active" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+      <span class="dot" onclick="currentSlide(5)"></span>
+      <span class="dot" onclick="currentSlide(6)"></span>
+    </div>
+  </div>
+
+
+
+
+  <div>
+
+    <div class="row">
+      <h2 class="song"><b>New Release</b></h2>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./trending songs/majbooooor.jfif" class="card-img-top" alt="">
+            <h5 class="card-title">Majboor</h5>
+            <p class="card-text">
+            <h3>Shehreyar x Zoha </h3>
+            </p>
+            <button id="btn">Indie</button>
+            <p>A story of silence and struggle.</p>
+
+            <audio id="majbooraudio" src="./trending songs/Majboor .mp3"></audio>
+            <button id="majboorPlayBtn" class=" butn " onclick="playSong('majbooraudio','majboorPlayBtn','majboorStopBtn')">
+              ▶ Play
+            </button>
+
+            <!-- STOP BUTTON -->
+            <button class="butn" id="majboorStopBtn" onclick="stopSong('majbooraudio','majboorPlayBtn','majboorStopBtn')">
+              ⏹ Stop
+            </button>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./trending songs/ChatGPT Image May 19, 2026, 11_44_56 PM.png" class="card-img-top" alt="">
+            <h5 class="card-title">Beauty And A Beat</h5>
+            <p class="card-text">
+            <h3>Justin Bieber</h3>
+            </p>
+            <button id="btn">Groove</button>
+            <p>Dance beats turning into moments .</p>
+            <audio id="beauty and a beat audio"
+              src="./trending songs/Justin Bieber - Beauty And A Beat (feat. Nicki Minaj).mp3"></audio>
+            <button id="beauty and a beat PlayBtn" class=" butn" onclick="playSong('beauty and a beataudio','beauty and a beat PlayBtn','beauty and a beat StopBtn')">
+              ▶ Play
+            </button>
+
+            <!-- STOP BUTTON -->
+            <button class="butn" id="beauty and a beat StopBtn" onclick="stopSong('beauty and a beataudio','beauty and a beat PlayBtn','beauty and a beat StopBtn')">
+              ⏹ Stop
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./trending songs/pal pal.jfif" class="card-img-top" alt="">
+            <h5 class="card-title">Pal Pal</h5>
+            <p class="card-text">
+            <h3>Talwinder x Afusic</h3>
+            </p>
+            <button id="btnn">Emotional</button>
+            <p>A soft emotional song.</p>
+            <audio id="pal pal audio" src="./trending songs/Pal Pal .mp3"></audio>
+            <button id="pal pal PlayBtn" class="butn" onclick="playSong('pal pal audio','pal pal PlayBtn','pal pal StopBtn')">
+              ▶ Play
+            </button>
+
+            <!-- STOP BUTTON -->
+            <button class="butn" id="pal pal StopBtn" onclick="stopSong('pal pal audio','pal pal PlayBtn','pal pal StopBtn')">
+              ⏹ Stop
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <div class="row">
+      <h2 class="song"><b>Classical Songs</b></h2>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./Cassical/abida parween/6c69c772-cd12-4033-8d4a-12eb1788d1cb.png" class="card-img-top" alt="">
+            <h5 class="card-title">Tu Jhoom</h5>
+            <p class="card-text">
+            <h3>Abida Parween x Naseebo </h3>
+            </p>
+            <button id="btn">Sufi</button>
+            <p>A spiritual vibe in every note.</p>
+            <audio id="Tu jhoom audio" src="./Cassical/abida parween/tu jhoom.mp3"></audio>
+            <button id="Tu jhoom PlayBtn" class="butn" onclick="playSong('Tu jhoom audio','Tu jhoom PlayBtn','Tu jhoom StopBtn')">
+              ▶ Play
+            </button>
+
+            <!-- STOP BUTTON -->
+            <button class="butn" id="Tu jhoom StopBtn" onclick="stopSong('Tu jhoom audio','Tu jhoom PlayBtn','Tu jhoom StopBtn')">
+              ⏹ Stop
+            </button>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./Cassical/nusrat fateh/tumhy dil lagi.png" class="card-img-top" alt="">
+            <h5 class="card-title">Tumhe Dil Lagi Bhool Jani Padegi</h5>
+            <p class="card-text-warning"><b>
+                <h3>Nusrat Fateh Ali Khan</h3>
+              </b></p>
+            <button id="btn">Qawwali</button>
+            <p>A timeless qawwali that touches the soul.</p>
+            <audio id="Tumhe Dil lagi audio" src="./Cassical/nusrat fateh/Tumhein Dillagi  .mp3"></audio>
+            <button id="Tumhe Dil lagi PlayBtn" class="butn" onclick="playSong('Tumhe Dil lagi audio','Tumhe Dil lagi PlayBtn','Tumhe Dil lagi StopBtn')">
+              ▶ Play
+            </button>
+
+            <!-- STOP BUTTON -->
+            <button class="butn" id="Tumhe Dil lagi StopBtn" onclick="stopSong('Tumhe Dil lagi audio','Tumhe Dil lagi PlayBtn','Tumhe Dil lagi StopBtn')">
+              ⏹ Stop
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./Cassical/rahat fateh/jag ghoomeya .png" class="card-img-top" alt="">
+            <h5 class="card-title">Jag Ghoomeya</h5>
+            <p class="card-text">
+            <h3>Rahat Fateh Ali Khan</h3>
+            </p>
+            <button id="btn">Soulful</button>
+            <p>A song that speaks the language of love.</p>
+            <audio id="Jag ghoomeya audio" src="./Cassical/rahat fateh/Jag Ghoomeya .mp3"></audio>
+            <button id="Jag ghoomeya PlayBtn" class="butn" onclick="playSong('Jag ghoomeya audio','Jag ghoomeya PlayBtn','Jag ghoomeya StopBtn')">
+              ▶ Play
+            </button>
+            <!-- STOP BUTTON -->
+            <button class="butn" id="Jag ghoomeya StopBtn" onclick="stopSong('Jag ghoomeya audio','Jag ghoomeya PlayBtn','Jag ghoomeya StopBtn')">
+              ⏹ Stop
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <div class="row">
+      <h2 class="song"><b>Rap Songs</b></h2>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./Rap Music/Eminem/stans.jfif" class="card-img-top" alt="">
+            <h5 class="card-title">Stans</h5>
+            <p class="card-text">
+            <h3>Eminem</h3>
+            </p>
+            <button id="btnn">Storytelling</button>
+            <p>A dark storytelling hip-hop rap.</p>
+            <audio id="Stans audio" src="./Rap Music/Eminem/rap Eminem 2.mp3"></audio>
+            <button id="StansPlayBtn" class="butn" onclick="playSong('Stans audio','StansPlayBtn','StansStopBtn')">
+              ▶ Play
+            </button>
+            <!-- STOP BUTTON -->
+            <button class="butn" id="StansStopBtn"  onclick="stopSong('Stans audio','StansPlayBtn','StansStopBtn')">
+              ⏹ Stop
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./Rap Music/Kendrick Lamar/ChatGPT Image Apr 29, 2026, 04_41_43 PM.png" class="card-img-top"
+              alt="">
+            <h5 class="card-title">Humble</h5>
+            <p class="card-text">
+            <h3>Kendrick Lumar</h3>
+            </p>
+            <button id="btnn">Conscious</button>
+            <p>A deep conscious hip-hop track.</p>
+            <audio id="Humble audio" src="./Rap Music/Kendrick Lamar/rap  Kendrick 1.mp3"></audio>
+            <button id="HumblePlayBtn" class="butn" onclick="playSong('Humble audio','HumblePlayBtn','HumbleStopBtn')">
+              ▶ Play
+            </button>
+            <!-- STOP BUTTON -->
+            <button class="butn" id="HumbleStopBtn"onclick="stopSong('Humble audio','HumblePlayBtn','HumbleStopBtn')">
+              ⏹ Stop
+            </button>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <img src="./Rap Music/The Notorious B.I.G/enhanced3.jpeg" class="card-img-top" alt="" id="rap">
+            <h5 class="card-title">Juicy</h5>
+            <p class="card-text">
+            <h3>The Notorious B.I.G</h3>
+            </p>
+            <button id="btnnn"
+              style="background-color: #ff007f; border-radius: 40px; width: 120px;">Inspirational</button>
+            <p>A classic hip-hop success anthem.</p>
+            <audio id="Juicy audio" src="./Rap Music/The Notorious B.I.G/rap notorious 1 .mp3"></audio>
+            <button id="JuicyPlayBtn" class="butn" onclick="playSong('Juicy audio','JuicyPlayBtn','JuicyStopBtn')">
+              ▶ Play
+            </button>
+            <!-- STOP BUTTON -->
+            <button class="butn" id="JuicyStopBtn" onclick="stopSong('Juicy audio','JuicyPlayBtn','JuicyStopBtn')">
+              ⏹ Stop
+            </button>
+
+          </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- booking -->
+  <div class="container mt-5">
+    <h2 class="text-center mb-4" style="color:#ff007f;">Concert Ticket Booking</h2>
+
+    <div class="row justify-content-center">
+
+      <div class="col-md-6">
+        <div class="card p-4 shadow-lg rounded-4">
+
+          <form>
+
+            <!-- Name -->
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" placeholder="Enter your name">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="Enter your email">
+            </div>
+
+            <!-- Concert Selection -->
+            <div class="mb-3">
+              <label class="form-label">Select Concert</label>
+              <select class="form-select">
+                <option selected>Choose...</option>
+                <option>Atif Aslam Live</option>
+                <option>Arijit Singh Night</option>
+                <option>Nusrat Tribute Show</option>
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div class="mb-3">
+              <label class="form-label">Select Date</label>
+              <input type="text" placeholder="mm/dd/yyy">
+            </div>
+
+            <!-- Tickets -->
+            <div class="mb-3">
+              <label class="form-label">Number of Tickets</label>
+              <input type="number" class="form-control" min="1" max="10">
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn w-100" style="background:#ff007f; color:white;">
+              Book Now
+            </button>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- Bootstrap JS -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </script>
+  <script>
+    let currentSlideIndex = 1;
+    showSlides(currentSlideIndex);
+
+    // Auto-slide functionality (changes every 7 seconds)
+    let autoSlideInterval = setInterval(() => {
+      moveSlide(1);
+    }, 7000);
+
+    function moveSlide(n) {
+      showSlides(currentSlideIndex += n);
+      resetTimer();
+    }
+
+    function currentSlide(n) {
+      showSlides(currentSlideIndex = n);
+      resetTimer();
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("slide");
+      let dots = document.getElementsByClassName("dot");
+
+      if (n > slides.length) { currentSlideIndex = 1; }
+      if (n < 1) { currentSlideIndex = slides.length; }
+
+      for (i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+      }
+
+      for (i = 0; i < dots.length; i++) {
+        dots[i].classList.remove("active");
+      }
+
+      slides[currentSlideIndex - 1].classList.add("active");
+      dots[currentSlideIndex - 1].classList.add("active");
+    }
+
+    function resetTimer() {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(() => {
+        moveSlide(1);
+      }, 7000);
+    }
+    function playSong(id,playbtnid,stopbtnid) {
+    
+      const playbtn = document.getElementById(playbtnid)
+      const stopbtn = document.getElementById(stopbtnid)
+      playbtn.innerText= "▶Playing"
+      stopbtn.innerText= "⏹Stop"
+      const audio = document.getElementById(id)
+      console.log(audio);
+      audio.play();
+    }
+    function stopSong(id,playbtnid,stopbtnid) {
+         const playbtn = document.getElementById(playbtnid)
+      const stopbtn = document.getElementById(stopbtnid)
+      playbtn.innerText= "▶Play"
+      stopbtn.innerText= "⏹Stopped"
+      const audio = document.getElementById(id)
+      audio.pause();
+    }
+
+
+
+
+  </script>
+  <!-- footer -->
+  <footer>
+
+    <div>
+      <div class="footer-logo">Listen Up</div>
+      <p class="foooter" style="color:#aaa; margin-top:10px;">
+        Feel The Beat. Live The Music.
+      </p>
+    </div>
+<div class="social-icons">
+
+  <!-- Home Page -->
+  <a href="./indexE.html">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <!-- Playlist Page -->
+  <a href="./Playlist1.html">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <!-- Artists Page -->
+  <a href="./Artists.html">
+    <i class="fab fa-youtube"></i>
+  </a>
+
+</div>
+    <!-- <div class="social-icons">
+
+      <a href="#">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
+      <a href="#">
+        <i class="fab fa-instagram"></i>
+      </a>
+
+      <a href="#">
+        <i class="fab fa-youtube"></i>
+      </a>
+
+    </div> -->
+
+  </footer>
+  <!-- footer -->
+</body>
+
+</html>

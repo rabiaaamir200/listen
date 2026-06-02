@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eminem - Artist Detail</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #0b0b0b;
+      color: white;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #000;
+      padding: 15px 40px;
+    }
+
+    .navbar-brand {
+      color: #ff007f !important;
+      font-weight: 700;
+      font-size: 28px;
+    }
+
+    .nav-link {
+      color: white !important;
+      margin: 0 10px;
+      transition: 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #ff007f !important;
+    }
+
+    /* MAIN SECTION */
+    .artist-section {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+    }
+
+    .artist-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      gap: 50px;
+      align-items: center;
+      background: #111;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 0 30px #ff007f(255, 62, 191, 0.2);
+    }
+
+    /* LEFT SIDE IMAGE */
+    .artist-image {
+      flex: 1;
+    }
+
+    .artist-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 4px solid #ff007f;
+    }
+
+    /* RIGHT SIDE CONTENT */
+    .artist-content {
+      flex: 1;
+    }
+
+    .artist-content h1 {
+      font-size: 50px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #ff007f;
+    }
+
+    .artist-content p {
+      color: #d1d1d1;
+      line-height: 1.9;
+      margin-bottom: 30px;
+    }
+
+    /* SONGS LAYOUT */
+    .songs h3 {
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .song-card {
+      background: #1c1c1c;
+      padding: 15px 20px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s;
+    }
+
+    .song-card:hover {
+      transform: translateX(10px);
+      background: #ff007f;
+    }
+
+    .song-name {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    /* THEMED PINK BUTTONS */
+    .play-btn {
+      background: #ff007f;
+      color: white;
+      border: 2px solid #ff007f;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .play-btn:hover {
+      background: black;
+      color: #ff007f;
+      border-color: #ff007f;
+    }
+
+    /* Active Highlight Play State (Turns black/pink when active) */
+    .btn-active-playing {
+      background: black !important;
+      border-color: #ff007f;
+      color:  #ff007f !important;
+      border-color:  #ff007f !important;
+      box-shadow: 0 0 10px #ff007f(255, 62, 191, 0.5);
+    }
+
+    .stop-btn {
+      background: transparent;
+      color:  #ff007f;
+      border: 2px solid  #ff007f;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .stop-btn:hover {
+      background:  #ff007f;
+      color: white;
+    }
+
+    .audio-player-engine {
+      display: none;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .artist-container {
+        flex-direction: column;
+      }
+      .artist-content h1 {
+        font-size: 38px;
+      }
+      .artist-image img {
+        height: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="./indexE.html">ListenUp</a>
+      <div>
+        <ul class="navbar-nav d-flex flex-row">
+          <li class="nav-item"><a class="nav-link" href="./indexE.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./Playlist1.html">Playlists</a></li>
+          <li class="nav-item"><a class="nav-link" href="./Artists.html">Artists</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="artist-section">
+    <div class="artist-container">
+
+      <div class="artist-image">
+        <img src="./Eminem.jpeg" alt="Eminem">
+      </div>
+
+      <div class="artist-content">
+        <h1>Eminem</h1>
+        <p>
+          Eminem is a world-famous rapper, songwriter, and producer known for his rapid-fire lyrics, powerful storytelling, and groundbreaking impact on hip-hop music. With iconic tracks and unmatched lyrical skill, he is considered one of the greatest rappers of all time.
+        </p>
+
+        <div class="songs">
+          <h3>Popular Songs</h3>
+
+          <div class="song-card">
+            <span class="song-name">Stans</span>
+            <div>
+              <button id="ctrlPlay1" class="play-btn me-2" onclick="ToggleTrack(1)">▶ Play</button>
+              <button class="stop-btn" onclick="KillTrack(1)">⏹ Stop</button>
+              <audio id="audioEngine1" class="audio-player-engine" src="../eproject_imges/Rap Music/Eminem/rap Eminem 2.mp3"></audio>
+            </div>
+          </div>
+
+          <div class="song-card">
+            <span class="song-name">Not Afraid</span>
+            <div>
+              <button id="ctrlPlay2" class="play-btn me-2" onclick="ToggleTrack(2)">▶ Play</button>
+              <button class="stop-btn" onclick="KillTrack(2)">⏹ Stop</button>
+              <audio id="audioEngine2" class="audio-player-engine" src="../eproject_imges/Rap Music/Eminem/rap Eminem 4.mp3"></audio>
+            </div>
+          </div>
+
+          <div class="song-card">
+            <span class="song-name">Lose Yourself</span>
+            <div>
+              <button id="ctrlPlay3" class="play-btn me-2" onclick="ToggleTrack(3)">▶ Play</button>
+              <button class="stop-btn" onclick="KillTrack(3)">⏹ Stop</button>
+              <audio id="audioEngine3" class="audio-player-engine" src="../eproject_imges/Rap Music/Eminem/rap Eminem 1.mp3"></audio>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    function ToggleTrack(trackId) {
+      const selectedAudio = document.getElementById("audioEngine" + trackId);
+      const selectedButton = document.getElementById("ctrlPlay" + trackId);
+
+      if (!selectedAudio.paused) {
+        selectedAudio.pause();
+        selectedButton.innerHTML = "▶ Play";
+        selectedButton.classList.remove("btn-active-playing");
+        return;
+      }
+
+      const runtimeAudios = document.querySelectorAll(".audio-player-engine");
+      const runtimeButtons = document.querySelectorAll(".play-btn");
+
+      runtimeAudios.forEach((audio) => {
+        audio.pause();
+        audio.currentTime = 0; 
+      });
+
+      runtimeButtons.forEach((btn) => {
+        btn.innerHTML = "▶ Play";
+        btn.classList.remove("btn-active-playing");
+      });
+
+      selectedAudio.play();
+      selectedButton.innerHTML = "⏸ Pause";
+      selectedButton.classList.add("btn-active-playing");
+
+      selectedAudio.onended = () => {
+        selectedButton.innerHTML = "▶ Play";
+        selectedButton.classList.remove("btn-active-playing");
+      };
+    }
+
+    function KillTrack(trackId) {
+      const targetAudio = document.getElementById("audioEngine" + trackId);
+      const targetButton = document.getElementById("ctrlPlay" + trackId);
+
+      targetAudio.pause();
+      targetAudio.currentTime = 0;
+
+      targetButton.innerHTML = "▶ Play";
+      targetButton.classList.remove("btn-active-playing");
+    }
+  </script>
+</body>
+</html>

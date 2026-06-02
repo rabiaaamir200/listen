@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Listen Up</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">  
+<style>
+  /* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #000;
+  color: white;
+  overflow-x: hidden;
+  padding-top: 80px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 10px 0;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-nav {
+  gap: 10px;
+}
+
+.nav-link {
+  color: white !important;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #ff007f !important;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.logo-container:hover .logo-text {
+  color: #ff007f;
+}
+
+.nav-logo {
+  width: 42px;
+  height: auto;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box input {
+  width: 240px;
+  height: 42px;
+  border-radius: 12px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  padding: 0 15px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.search-box input::placeholder {
+  color: #ccc;
+}
+
+.search-box input:focus {
+  border-color: #ff007f;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)),
+    url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1974&auto=format&fit=crop')
+    center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.hero-content {
+  max-width: 850px;
+}
+
+.hero-content h1 {
+  font-size: 72px;
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+.hero-content span {
+  color: #ff007f;
+}
+
+.hero-content p {
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.8;
+  color: #d0d0d0;
+  margin-bottom: 35px;
+  font-size: 17px;
+}
+
+.hero-btn {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 50px;
+  background: #ff007f;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #ff007f;
+}
+
+/* =========================
+   ARTISTS SECTION
+========================= */
+
+.artists {
+  padding: 80px 5%;
+  background: #101010;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 45px;
+  margin-bottom: 60px;
+}
+
+.section-title span {
+  color: #ff007f;
+}
+
+/* FIXED RESPONSIVE GRID */
+
+.artist-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.artist-card {
+  background: #181818;
+  border-radius: 25px;
+  overflow: hidden;
+  transition: 0.4s;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.artist-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px rgba(255, 0, 127, 0.4);
+}
+
+.artist-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  padding: 15px;
+  border-radius: 50%;
+}
+
+.artist-info {
+  padding: 20px;
+}
+
+.artist-info h3 {
+  margin-bottom: 18px;
+  font-size: 24px;
+}
+
+.listen-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 40px;
+  background: #ff007f;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.listen-btn:hover {
+  background: white;
+  color: black;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+  padding: 70px 5%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  background: #0d0d0d;
+}
+
+.stat-box {
+  background: #181818;
+  padding: 35px;
+  border-radius: 20px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.stat-box:hover {
+  transform: scale(1.05);
+}
+
+.stat-box h2 {
+  color: #ff007f;
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.stat-box p {
+  color: #cfcfcf;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  background: black;
+  padding: 35px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ff007f;
+  text-align: center;
+}
+
+.foooter {
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons a {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #181818;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background: #ff007f;
+  transform: scale(1.1);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px) {
+
+  .navbar-nav {
+    margin: 15px 0;
+    text-align: center;
+  }
+
+  .d-flex.align-items-center {
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 52px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 38px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  body {
+    padding-top: 70px;
+  }
+
+  .hero {
+    min-height: 85vh;
+    padding: 30px 15px;
+  }
+
+  .hero-content h1 {
+    font-size: 38px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .hero-btn {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .section-title {
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .artist-container {
+    grid-template-columns: 1fr;
+  }
+
+  .artist-card img {
+    height: 250px;
+  }
+
+  .artist-info h3 {
+    font-size: 22px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-box h2 {
+    font-size: 34px;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  .nav-logo {
+    width: 34px;
+  }
+}
+
+/* =========================
+   EXTRA SMALL DEVICES
+========================= */
+
+@media (max-width: 480px) {
+
+  .hero-content h1 {
+    font-size: 30px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+
+  .hero-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .artist-card img {
+    height: 220px;
+  }
+
+  .search-box input {
+    font-size: 14px;
+  }
+
+  .footer-logo {
+    font-size: 24px;
+  }
+}
+</style>
+
+</head>
+<body>
+
+  <!-- Navbar -->
+
+ <!-- Navbar Start -->
+
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+
+      <!-- Logo -->
+       <!-- Logo -->
+<div>
+  <a href="./indexE.html" class="logo-container text-decoration-none">
+    <img src="./logo.jpeg" alt="Logo" class="nav-logo">
+    <span class="logo-text"><b>ListenUp</b></span>
+  </a>
+</div>
+      <!-- <nav>
+        <div class="logo-container">
+          <img src="./logo.jpeg" alt="Logo" class="nav-logo">
+          <span class="logo-text"><b>ListenUp</b></span>
+        </div>
+      </nav> -->
+
+      <!-- Toggle Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu Items -->
+       
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./indexE.html">Home</a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="./Playlist1.html ">Playlists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./Artists.html">Artists</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+
+  <form class="search-box" role="search">
+    <input type="search" placeholder="Search" aria-label="Search">
+  </form>
+<!-- <div class="d-flex">
+         <form  class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        
+      </form> -->
+        
+
+      
+          <a href="#" class="btn btn-outline-light me-2">Login</a>
+          <div>
+
+            <!-- Buttons -->
+          </div>
+
+
+  </nav>
+  
+
+  <!-- Hero Section -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>Top Music <span>Artists</span></h1>
+
+      <p>
+        Welcome to Listen Up — Discover the most loved voices,
+        trending singers, and unforgettable music experiences
+        from legendary artists around the world.
+      </p>
+
+      <button class="hero-btn">
+        Explore Artists
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- Artists Section -->
+
+  <section class="artists">
+
+    <h2 class="section-title">
+       Featured <span>Artists</span>
+    </h2>
+
+    <div class="artist-container">
+
+      <!-- Abida parween -->
+       <a href="./artist1.2.html" style="text-decoration: none; color: inherit; display: block;">
+  <div class="artist-card">
+    
+    <img src="./abida parween.jpeg" alt="Abida Parveen">
+
+    <div class="artist-info">
+      <h3>Abida Parveen</h3>
+
+      <button class="listen-btn">
+        <i class="bi bi-play-fill"></i> Listen Now
+      </button>
+    </div>
+
+  </div>
+</a>
+ <!-- Abida parween -->
+<!-- atif aslam -->
+ <a href="./artist2.2.html" style="text-decoration: none; color: inherit; display: block;">
+  <div class="artist-card">
+    
+    <img src="./Atif aslam.jpeg" alt="Atif aslam">
+
+    <div class="artist-info">
+      <h3>Atif aslam</h3>
+
+      <button class="listen-btn">
+        <i class="bi bi-play-fill"></i> Listen Now
+      </button>
+    </div>
+
+  </div>
+</a>
+ <!-- atif aslam -->
+  <!-- Eminem -->
+   <a href="./artist3.3.html" style="text-decoration: none; color: inherit; display: block;">
+  <div class="artist-card">
+    
+    <img src="./AC/DC.jpeg" alt=" Eminem">
+
+    <div class="artist-info">
+      <h3> AC/DC</h3>
+
+      <button class="listen-btn">
+        <i class="bi bi-play-fill"></i> Listen Now
+      </button>
+    </div>
+
+  </div>
+</a>
+   <!-- Eminem -->
+    <!-- AC/DC -->
+     <a href="./artist4.4.html" style="text-decoration: none; color: inherit; display: block;">
+  <div class="artist-card">
+    
+    <img src="./Eminem.jpeg" alt="AC/DC ">
+
+    <div class="artist-info">
+      <h3>Eminem </h3>
+
+      <button class="listen-btn">
+        <i class="bi bi-play-fill"></i> Listen Now
+      </button>
+    </div>
+
+  </div>
+</a>
+<!-- AC/DC -->
+
+  </section>
+
+  <!-- Stats Section -->
+
+  <section class="stats">
+
+    <div class="stat-box">
+      <h2>50M+</h2>
+      <p>Monthly Listeners</p>
+    </div>
+
+    <div class="stat-box">
+      <h2>500+</h2>
+      <p>Top Songs</p>
+    </div>
+
+    <div class="stat-box">
+      <h2>120+</h2>
+      <p>Albums Released</p>
+    </div>
+
+    <div class="stat-box">
+      <h2>100+</h2>
+      <p>Music Awards</p>
+    </div>
+
+  </section>
+<!-- footer -->
+  <footer>
+
+    <div>
+      <div class="footer-logo">Listen Up</div>
+      <p class="foooter" style="color:#aaa; margin-top:10px;">
+        Feel The Beat. Live The Music.
+      </p>
+    </div>
+<div class="social-icons">
+
+  <!-- Home Page -->
+  <a href="./indexE.html">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <!-- Playlist Page -->
+  <a href="./Playlist1.html">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <!-- Artists Page -->
+  <a href="./Artists.html">
+    <i class="fab fa-youtube"></i>
+  </a>
+
+</div>
+    <!-- <div class="social-icons">
+
+      <a href="#">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
+      <a href="#">
+        <i class="fab fa-instagram"></i>
+      </a>
+
+      <a href="#">
+        <i class="fab fa-youtube"></i>
+      </a>
+
+    </div> -->
+
+  </footer>
+<!-- footer -->
+</body>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </script>
+</html>
